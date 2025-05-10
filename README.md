@@ -45,7 +45,7 @@ The project keeps the **CodeIgniter HMVC architecture**. This decision was made 
 
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/your-repo/project-name.git
+   git clone https://github.com/christianmartincabucos/ci-user-management
    cd project-name
    ```
 
