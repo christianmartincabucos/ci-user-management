@@ -15,15 +15,10 @@ class Users extends MX_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         
-        // Initialize data array
-        $this->data = array(
-            'page_content' => FALSE
-        );
-        
         $this->data['form_result'] = (object) array('form_name' => FALSE, 'form_success' => FALSE);
         
         // Load service
-        require_once APPPATH . 'services/UserService.php';
+        require_once APPPATH . 'modules/users/services/UserService.php';
         $this->user_service = new UserService();
     }
 

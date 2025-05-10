@@ -3,7 +3,6 @@
 class UserService {
     
     protected $CI;
-    protected $user_repository;
     
     public function __construct() {
         $this->CI =& get_instance();
@@ -12,13 +11,12 @@ class UserService {
         $this->CI->load->library('session');
         $this->CI->load->helper('url');
         
-        // Load repository
-        require_once APPPATH . 'repositories/UserRepository.php';
-        $this->user_repository = new UserRepository();
+        // Load model using CI loader
+        $this->CI->load->model('users/UserModel', 'user_model');
     }
     
     public function authenticate($email, $password) {
-        $user = $this->user_repository->get_by_email($email);
+        $user = $this->CI->user_model->get_by_email($email);
         
         if ($user && password_verify($password, $user->password)) {
             // Set session data
@@ -42,7 +40,7 @@ class UserService {
     
     public function register_initial($name, $email, $phone) {
         // Check if email is unique
-        if (!$this->user_repository->check_unique_email($email)) {
+        if (!$this->CI->user_model->check_unique_email($email)) {
             return [
                 'success' => FALSE,
                 'message' => 'Error: This email is already registered'
@@ -61,7 +59,7 @@ class UserService {
             'created_at' => date('Y-m-d H:i:s')
         ];
         
-        $user_id = $this->user_repository->create($user_data);
+        $user_id = $this->CI->user_model->create($user_data);
         
         if ($user_id) {
             return [
@@ -79,7 +77,7 @@ class UserService {
     
     public function complete_registration($token, $password) {
         // Get user by token
-        $user = $this->user_repository->get_by_token($token);
+        $user = $this->CI->user_model->get_by_token($token);
         
         if (!$user) {
             return [
@@ -95,7 +93,7 @@ class UserService {
             'updated_at' => date('Y-m-d H:i:s')
         ];
         
-        if ($this->user_repository->update($user->id, $user_data)) {
+        if ($this->CI->user_model->update($user->id, $user_data)) {
             return [
                 'success' => TRUE,
                 'user_id' => $user->id
@@ -109,22 +107,22 @@ class UserService {
     }
     
     public function get_user($id) {
-        return $this->user_repository->get($id);
+        return $this->CI->user_model->get($id);
     }
     
     public function get_all_users() {
-        return $this->user_repository->get_all();
+        return $this->CI->user_model->get_all();
     }
     
     public function get_user_by_token($token) {
-        return $this->user_repository->get_by_token($token);
+        return $this->CI->user_model->get_by_token($token);
     }
     
     public function update_user($id, $data) {
         // If email is being updated, check it's unique
         if (isset($data['email'])) {
-            $user = $this->user_repository->get($id);
-            if ($user && $user->email != $data['email'] && !$this->user_repository->check_unique_email($data['email'], $id)) {
+            $user = $this->CI->user_model->get($id);
+            if ($user && $user->email != $data['email'] && !$this->CI->user_model->check_unique_email($data['email'], $id)) {
                 return [
                     'success' => FALSE,
                     'message' => 'Error: This email is already registered'
@@ -132,7 +130,7 @@ class UserService {
             }
         }
         
-        if ($this->user_repository->update($id, $data)) {
+        if ($this->CI->user_model->update($id, $data)) {
             return [
                 'success' => TRUE
             ];
@@ -145,7 +143,7 @@ class UserService {
     }
     
     public function delete_user($id) {
-        if ($this->user_repository->delete($id)) {
+        if ($this->CI->user_model->delete($id)) {
             return [
                 'success' => TRUE
             ];
@@ -163,7 +161,7 @@ class UserService {
             'updated_at' => date('Y-m-d H:i:s')
         ];
         
-        if ($this->user_repository->update($id, $user_data)) {
+        if ($this->CI->user_model->update($id, $user_data)) {
             return [
                 'success' => TRUE
             ];

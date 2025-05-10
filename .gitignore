@@ -27,6 +27,7 @@ application/cache/*
 application/config/database.php
 
 assets/node_modules/
+system/application/cache/*
 
 # Build outputs
 public/build/
