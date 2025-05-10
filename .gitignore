@@ -1,0 +1,40 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE/editor config
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.*
+
+*/config/development
+*/logs/log-*.php
+!*/logs/index.html
+*/cache/*
+!system/cache/*
+!*/cache/index.html
+!*/cache/.htaccess
+
+application/logs/*
+!application/logs/index.html
+
+application/cache/*
+!application/cache/index.html
+
+application/config/database.php
+
+assets/node_modules/
+
+# Build outputs
+public/build/
+dist/
+
+# Other temporary files
+*.bak
+*.swp
+*.swo
+*.log
+*.tmp

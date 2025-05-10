@@ -1,0 +1,37 @@
+
+
+RewriteEngine On
+RewriteBase /
+
+#FORCE WWW AND SSL
+# RewriteEngine On
+# RewriteCond %{HTTPS} off [OR]
+# RewriteCond %{HTTP_HOST} !^www\.dendyresidences\.com\.au$ [NC]
+# RewriteRule ^(.*)$ https://www.dendyresidences.com.au/$1 [L,R=301]
+
+# Removes access to the system folder by users.
+#Additionally this will allow you to create a System.php controller,
+
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ index.php?/$1 [L]
+
+# When your application folder isn't in the system folder
+
+RewriteCond %{REQUEST_URI} ^application.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+# Checks to see if the user is attempting to access a valid file,
+# such as an image or css document, if this isn't true it sends the
+# request to index.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]
+
+
+SetEnvIfNoCase Referer buttons-for-website.com spammer=yes
+SetEnvIfNoCase Referer semalt.com spammer=yes
+
+Order allow,deny
+Allow from all
+Deny from env=spammer
