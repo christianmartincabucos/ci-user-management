@@ -24,8 +24,9 @@ application/logs/*
 application/cache/*
 !application/cache/index.html
 
-assets/node_modules/
+application/config/database.php
 
+assets/node_modules/
 system/application/cache/*
 
 # Build outputs
