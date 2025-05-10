@@ -14,7 +14,6 @@ Thumbs.db
 */logs/log-*.php
 !*/logs/index.html
 */cache/*
-!system/cache/*
 !*/cache/index.html
 !*/cache/.htaccess
 
@@ -27,7 +26,8 @@ application/cache/*
 application/config/database.php
 
 assets/node_modules/
-system/application/cache/*
+
+system/application/cache
 
 # Build outputs
 public/build/
