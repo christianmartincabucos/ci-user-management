@@ -83,12 +83,11 @@ The project keeps the **CodeIgniter HMVC architecture**. This decision was made 
 - Check and update values in `application/config/config.php`.
 - Don’t forget to set the right environment variables.
 
-## Notes for Developers
+## Database Access
 
-- The frontend uses **Tailwind CSS** and you can find the compiled file at `assets/css/tailwind.min.css`.
-- Custom colors are handled with CSS variables in the common layout template.
-- CodeIgniter's MVC structure is extended with HMVC for better modularity.
-- Authentication is built using dedicated controllers and models.
+You can access the database using **phpMyAdmin** at:
+
+👉 [http://localhost:8081/](http://localhost:8081/)
 
 ## Database Schema
 
@@ -108,3 +107,9 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
+## Notes!
+
+- The frontend uses **Tailwind CSS** and you can find the compiled file at `assets/css/tailwind.min.css`.
+- Custom colors are handled with CSS variables in the common layout template.
+- CodeIgniter's MVC structure is extended with HMVC for better modularity.
+- Authentication is built using dedicated controllers and models.
