@@ -90,8 +90,6 @@ The project keeps the **CodeIgniter HMVC architecture**. This decision was made 
 - CodeIgniter's MVC structure is extended with HMVC for better modularity.
 - Authentication is built using dedicated controllers and models.
 
-Feel free to jump into the code and start exploring. Let me know if you run into anything that needs clarification!
-
 ## Database Schema
 
 Here’s the SQL statement to create the `users` table:
